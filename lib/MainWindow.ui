@@ -34,23 +34,12 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QLabel" name="time">
+           <widget class="QLabel" name="l_time">
             <property name="font">
              <font>
-              <pointsize>36</pointsize>
+              <family>Segoe UI Variable Display Semib</family>
+              <pointsize>32</pointsize>
+              <bold>true</bold>
              </font>
             </property>
             <property name="layoutDirection">
@@ -62,20 +51,10 @@
             <property name="text">
              <string>00:00:00</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
            </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </item>
@@ -105,7 +84,15 @@
          </layout>
         </item>
         <item>
-         <widget class="QTextBrowser" name="tb_show_ct"/>
+         <widget class="QTextBrowser" name="tb_show_ct">
+          <property name="font">
+           <font>
+            <family>Segoe UI Variable Display</family>
+            <pointsize>11</pointsize>
+            <bold>false</bold>
+           </font>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

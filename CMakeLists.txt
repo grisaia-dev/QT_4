@@ -13,11 +13,15 @@ endif()
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
-set(PROJECT_SOURCES_FILES main.cpp)
+set(PROJECT_SOURCES_FILES 
+    main.cpp
+    lib/MainWindow.cpp
+    lib/StopWatch.cpp
+)
 set(PROJECT_HEADERS_FILES 
     lib/MainWindow.hpp
     lib/MainWindow.ui
-    lib/stopwatch.hpp
+    lib/StopWatch.hpp
 )
 
 qt_add_executable(${PROJECT_NAME} MANUAL_FINALIZATION ${PROJECT_SOURCES_FILES} ${PROJECT_HEADERS_FILES})
