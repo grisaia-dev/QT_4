@@ -1,6 +1,7 @@
 ﻿#include "MainWindow.hpp"
+#include "StopWatch.hpp"
 
-MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow), timer(new StopWatch()), t(new QTimer(this)) {
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow), timer(new StopWatch()) {
     ui->setupUi(this);
 
     // Buttons
@@ -13,8 +14,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Text timer
     ui->l_time->setText("0:0:0");
 
-    connect(timer, &StopWatch::sig_circleTime, this, &MainWindow::ctSignal);
-    connect(timer, &StopWatch::sig_updateTime, this, &MainWindow::timeSignal);
+    QObject::connect(timer, &StopWatch::sig_circleTime, this, &MainWindow::ctSignal);
+    connect(timer, &StopWatch::sig_showTime, this, &MainWindow::timeSignal);
 }
 
 // slots
@@ -24,15 +25,15 @@ void MainWindow::on_btn_clear_clicked() {
     ui->btn_start_stop->setText("Старт");
     ui->btn_start_stop->setChecked(false);
     ui->l_time->setText("0:0:0");
-    ui->tb_show_ct->clear();
+    //ui->tb_show_ct->clear();
 }
 
 void MainWindow::on_btn_start_stop_toggled(bool) {
     if (ui->btn_start_stop->isChecked()) {
-        ui->btn_start_stop->setText("Стоп");
-        ui->btn_circle->setEnabled(true);
         timer->start_timer();
         timeSendSignal();
+        ui->btn_start_stop->setText("Стоп");
+        ui->btn_circle->setEnabled(true);
     } else {
         timer->stop_timer();
         ui->btn_start_stop->setText("Старт");
@@ -57,5 +58,5 @@ void MainWindow::timeSignal(QString str) {
 }
 
 void MainWindow::timeSendSignal() {
-    timer->sig_updateTime(timer->update());
+    timer->sig_showTime(timer->sendShowTime());
 }

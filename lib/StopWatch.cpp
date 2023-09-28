@@ -1,8 +1,6 @@
 ﻿#include "StopWatch.hpp"
 
 StopWatch::StopWatch() : timer(new QTimer(this)) {
-	timer->setInterval(1);
-
 	m = 0;
 	s = 0;
 	ms = 0;
@@ -11,7 +9,7 @@ StopWatch::StopWatch() : timer(new QTimer(this)) {
 	t_m = 0;
 	circle = 0;
 
-	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+	connect(timer, &QTimer::timeout, this, &StopWatch::update);
 }
 
 void StopWatch::clear() {
@@ -22,12 +20,12 @@ void StopWatch::clear() {
 	t_s = 0;
 	t_m = 0;
 	circle = 0;
-	showText.clear();
+	showTimer.clear();
 }
 
-QString StopWatch::update() {
+void StopWatch::update() {
 	ms++;
-	if (ms >= 1000) {
+	if (ms >= 10) {
 		ms = 0;
 		s++;
 	}
@@ -37,7 +35,7 @@ QString StopWatch::update() {
 	}
 
 	t_ms++;
-	if (t_ms >= 1000) {
+	if (t_ms >= 10) {
 		t_ms = 0;
 		t_s++;
 	}
@@ -46,8 +44,12 @@ QString StopWatch::update() {
 		t_m++;
 	}
 
-	showText = QString("%1:%2:%3").arg(m).arg(s).arg(ms);
-	return showText;
+	showTimer = QString("%1:%2:%3").arg(m).arg(s).arg(ms);
+	sig_showTime(showTimer);
+}
+
+QString StopWatch::sendShowTime() {
+	return showTimer;
 }
 
 QString StopWatch::sendCircleTime() {

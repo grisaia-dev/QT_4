@@ -26,5 +26,4 @@ private slots:
 private:
     Ui::MainWindow* ui;
     StopWatch* timer;
-    QTimer* t;
 };
